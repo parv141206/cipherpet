@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Regular.ttf");
+}
+@font-face {
+  font-family: "RobotoLight";
+  src: url("/fonts/Roboto-Light.ttf");
+}
+@font-face {
+  font-family: "Title";
+  src: url("/fonts/fonts.ttf");
+}
+@theme {
+  --font-roboto: "Roboto";
+  --font-roboto-light: "RobotoLight";
+  --font-title: "Title";
+}
+
+body {
+  font-family: "Roboto";
+}
