@@ -1,5 +1,10 @@
 export function isRSAPossible(p: number, q: number) {
   let numberOfPrimes = 0;
+  if (p > q) {
+    const temp = p;
+    p = q;
+    q = temp;
+  }
   for (let i = p + 1; i < q; i++) {
     if (numberOfPrimes > 0) {
       return true;
@@ -171,4 +176,52 @@ export function decrypt(
   privateKey: { d: number; n: number },
 ): number {
   return modPow(ciphertext, privateKey.d, privateKey.n);
+}
+
+const CUSTOM_ALPHABET = "abcdefghijklmnopqrstuvwxyz 0123456789.,?!@#";
+
+export function charToIndex(char: string): number {
+  const index = CUSTOM_ALPHABET.indexOf(char.toLowerCase());
+  if (index === -1) {
+    throw new Error(`Unsupported character: '${char}'`);
+  }
+  return index;
+}
+
+export function indexToChar(index: number): string | undefined {
+  if (index < 0 || index >= CUSTOM_ALPHABET.length) {
+    throw new Error(`Invalid index: ${index}`);
+  }
+  return CUSTOM_ALPHABET[index];
+}
+const ENCODE_ALPHABET =
+  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
+const BASE = ENCODE_ALPHABET.length;
+export function encodeNumbers(numbers: number[]): string {
+  return numbers
+    .map((num) => {
+      if (num < 0) throw new Error("Negative numbers are not supported.");
+      let str = "";
+      do {
+        str = ENCODE_ALPHABET[num % BASE] + str;
+        num = Math.floor(num / BASE);
+      } while (num > 0);
+      return str.padStart(2, ENCODE_ALPHABET[0]);
+    })
+    .join("");
+}
+export function decodeString(encoded: string): number[] {
+  const chunkSize = 2;
+  if (encoded.length % chunkSize !== 0) {
+    throw new Error("Invalid encoded string length.");
+  }
+
+  const chunks = encoded.match(new RegExp(`.{${chunkSize}}`, "g"))!;
+  return chunks.map((chunk) => {
+    return chunk.split("").reduce((acc, char) => {
+      const val = ENCODE_ALPHABET.indexOf(char);
+      if (val === -1) throw new Error(`Invalid character: ${char}`);
+      return acc * BASE + val;
+    }, 0);
+  });
 }

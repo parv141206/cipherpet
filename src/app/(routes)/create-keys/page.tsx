@@ -28,6 +28,7 @@ export default function CreateKeys() {
 
       console.log(keys);
       setKeys(keys);
+      setIsError(false);
     } else {
       setIsError(true);
     }
