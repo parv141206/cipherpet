@@ -2,7 +2,7 @@
 import React from "react";
 import Slide from "../Slide";
 import Card from "../Card";
-import { ChevronDown } from "lucide-react"; // Install lucide-react if not already
+import { ChevronDown } from "lucide-react";
 
 export default function Decryption() {
   return (
@@ -31,7 +31,7 @@ export default function Decryption() {
               </Card>
             </Slide>
 
-            <div className="flex justify-center text-gray-500">
+            <div className="flex w-2/3 justify-center text-gray-500">
               <ChevronDown className="h-8 w-8 animate-bounce" />
             </div>
             <Slide direction="up">

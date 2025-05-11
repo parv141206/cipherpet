@@ -2,13 +2,13 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { CiMenuFries } from "react-icons/ci";
-import { FaLock, FaKey, FaInfoCircle } from "react-icons/fa";
+import { FaLock, FaKey, FaInfoCircle, FaUnlock } from "react-icons/fa";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="flex w-full items-center justify-center p-4 md:p-5">
+    <header className="sticky top-0 z-[200] flex w-full items-center justify-center p-4 md:p-5">
       <nav className="flex w-full max-w-screen-xl flex-col justify-center rounded-2xl bg-black p-4 shadow-2xl shadow-white/10 md:flex-row md:items-center md:justify-between">
         <div className="flex w-full items-center justify-between text-xl font-bold text-white md:mb-0 md:block md:w-auto">
           CipherPet
@@ -26,7 +26,14 @@ export default function Navbar() {
           } flex-col items-center gap-4 text-gray-300`}
         >
           <Link
-            href="#"
+            href="/create-keys"
+            className="flex items-center gap-2 transition-colors duration-200 hover:text-white"
+          >
+            <FaKey className="text-gray-500" />
+            Create keys
+          </Link>
+          <Link
+            href="/encrypt"
             className="flex items-center gap-2 transition-colors duration-200 hover:text-white"
           >
             <FaLock className="text-gray-500" />
@@ -34,15 +41,15 @@ export default function Navbar() {
           </Link>
 
           <Link
-            href="#"
+            href="/decrypt"
             className="flex items-center gap-2 transition-colors duration-200 hover:text-white"
           >
-            <FaKey className="text-gray-500" />
+            <FaUnlock className="text-gray-500" />
             Decrypt
           </Link>
 
           <Link
-            href="#"
+            href="/about"
             className="flex items-center gap-2 transition-colors duration-200 hover:text-white"
           >
             <FaInfoCircle className="text-gray-500" />

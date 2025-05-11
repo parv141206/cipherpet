@@ -13,6 +13,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Environment, PerspectiveCamera } from "@react-three/drei";
 import { TextComponent } from "~/components/Branding/TextComponent";
 import type * as THREE from "three";
+import Button from "~/components/Button";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,9 +36,9 @@ export default function Home() {
 
     //Start at center, shrink slightly and move right
     tl.to(mesh.scale, {
-      x: 0.9,
-      y: 0.9,
-      z: 0.9,
+      x: 0.4,
+      y: 0.4,
+      z: 0.4,
       ease: "none",
     });
     tl.to(
@@ -55,19 +56,21 @@ export default function Home() {
       x: -1.5,
       y: -0.5,
       ease: "none",
+      opacity: 0.5,
     });
 
     //After reaching left, grow back to original size
     tl.to(mesh.scale, {
-      x: 1,
-      y: 1,
-      z: 1,
+      x: 0.6,
+      y: 0.6,
+      z: 0.6,
       ease: "none",
     });
 
     //Then return to center
     tl.to(mesh.position, {
       x: 0,
+      y: 0,
       ease: "none",
     });
 
@@ -96,7 +99,7 @@ export default function Home() {
       ref={containerRef}
       className="gap-3 p-3 md:container md:mx-auto md:p-10"
     >
-      <section className="fixed top-0 left-0 flex h-[100vh] flex-col items-center justify-center">
+      <section className="fixed top-0 left-0 z-[-1] flex h-[100vh] w-screen flex-col items-center justify-center md:w-auto">
         <motion.div
           initial={{
             opacity: 0,
@@ -124,9 +127,7 @@ export default function Home() {
             <directionalLight intensity={3} position={[0, 3, 2]} />
             <PerspectiveCamera makeDefault fov={30} position={[0, 0, 6]} />
             <Environment preset="city" />
-            <TextComponent opacity={opacity} />{" "}
-            {/* Pass opacity to TextComponent */}
-            <Cube setMeshRef={setMesh} />
+            <TextComponent opacity={opacity} /> <Cube setMeshRef={setMesh} />
           </Canvas>
         </motion.div>
       </section>
@@ -139,7 +140,10 @@ export default function Home() {
       <section id="decryption-section" className="min-h-screen py-20">
         <Decryption />
       </section>
-      <div className="flex h-[80vh] items-center justify-center"></div>
+      <div className="relative flex h-[80vh] flex-col items-center justify-center gap-5">
+        <div className="font-title text-9xl">Get Started!</div>
+        <div className="text-xl">Create a key to get started!</div>
+      </div>
     </main>
   );
 }
