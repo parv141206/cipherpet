@@ -13,14 +13,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Environment, PerspectiveCamera } from "@react-three/drei";
 import { TextComponent } from "~/components/Branding/TextComponent";
 import type * as THREE from "three";
-import Button from "~/components/Button";
+import { Loader } from "~/components/Loader";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const containerRef = useRef(null);
   const [mesh, setMesh] = useState<THREE.Object3D | null>(null);
-  const [opacity, setOpacity] = useState(1); // State to manage opacity based on scroll
+  const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
     if (!mesh) return;
@@ -95,7 +95,10 @@ export default function Home() {
   }, []);
 
   return (
-    <main
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1, duration: 1 }}
       ref={containerRef}
       className="gap-3 p-3 md:container md:mx-auto md:p-10"
     >
@@ -110,8 +113,9 @@ export default function Home() {
             filter: "blur(0px)",
           }}
           transition={{
-            duration: 5,
+            duration: 1,
             ease: "easeOut",
+            delay: 1.5,
           }}
           className="md:h-[100vh] md:w-[100vw]"
         >
@@ -128,6 +132,7 @@ export default function Home() {
             <PerspectiveCamera makeDefault fov={30} position={[0, 0, 6]} />
             <Environment preset="city" />
             <TextComponent opacity={opacity} /> <Cube setMeshRef={setMesh} />
+            <Loader />
           </Canvas>
         </motion.div>
       </section>
@@ -144,6 +149,6 @@ export default function Home() {
         <div className="font-title text-9xl">Get Started!</div>
         <div className="text-xl">Create a key to get started!</div>
       </div>
-    </main>
+    </motion.main>
   );
 }

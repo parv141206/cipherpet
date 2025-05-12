@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { CiMenuFries } from "react-icons/ci";
@@ -11,7 +12,10 @@ export default function Navbar() {
     <header className="sticky top-0 z-[200] flex w-full items-center justify-center p-4 md:p-5">
       <nav className="flex w-full max-w-screen-xl flex-col justify-center rounded-2xl bg-black p-4 shadow-2xl shadow-white/10 md:flex-row md:items-center md:justify-between">
         <div className="flex w-full items-center justify-between text-xl font-bold text-white md:mb-0 md:block md:w-auto">
-          CipherPet
+          <Link href={"/"} className="flex items-center justify-center gap-3">
+            <Image src={"/favicon.ico"} alt="logo" width={25} height={25} />
+            <div>CipherPet</div>
+          </Link>
           <div className="md:hidden">
             <CiMenuFries
               onClick={() => setIsOpen(!isOpen)}
