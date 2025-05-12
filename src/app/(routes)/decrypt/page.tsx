@@ -71,7 +71,7 @@ export default function Decrypt() {
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="private-key" className="text-sm font-semibold">
-              Enter Private Key (d, n)
+              Enter Private Key {`{d , n}`}
             </label>
             <input
               id="private-key"
