@@ -1,83 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 "use client";
+
 import { Canvas } from "@react-three/fiber";
 import React, { useEffect, useRef, useState } from "react";
 import { Cube } from "~/components/Branding/Cube";
 import { motion } from "motion/react";
-import Encryption from "~/components/Branding/Encryption";
-import Decryption from "~/components/Branding/Decryption";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Features from "~/components/Branding/Features";
 import { Environment, PerspectiveCamera } from "@react-three/drei";
 import { TextComponent } from "~/components/Branding/TextComponent";
-import type * as THREE from "three";
 import { Loader } from "~/components/Loader";
-
-gsap.registerPlugin(ScrollTrigger);
+import Introduction from "~/components/Branding/Introduction";
+import SupportedTechniques from "~/components/Branding/SupportedTechniques";
+import Link from "next/link";
+import Button from "~/components/Button";
+import GradientBackground from "~/components/Branding/GradientBackground";
 
 export default function Home() {
-  const containerRef = useRef(null);
-  const [mesh, setMesh] = useState<THREE.Object3D | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [opacity, setOpacity] = useState(1);
-
-  useEffect(() => {
-    if (!mesh) return;
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-    });
-
-    //Start at center, shrink slightly and move right
-    tl.to(mesh.scale, {
-      x: 0.4,
-      y: 0.4,
-      z: 0.4,
-      ease: "none",
-    });
-    tl.to(
-      mesh.position,
-      {
-        x: 2.5,
-        y: 0.1,
-        ease: "none",
-      },
-      "<",
-    );
-
-    //Stay small, move left
-    tl.to(mesh.position, {
-      x: -1.5,
-      y: -0.5,
-      ease: "none",
-      opacity: 0.5,
-    });
-
-    //After reaching left, grow back to original size
-    tl.to(mesh.scale, {
-      x: 0.6,
-      y: 0.6,
-      z: 0.6,
-      ease: "none",
-    });
-
-    //Then return to center
-    tl.to(mesh.position, {
-      x: 0,
-      y: 0,
-      ease: "none",
-    });
-
-    return () => {
-      tl.kill();
-    };
-  }, [mesh]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,7 +27,7 @@ export default function Home() {
       setOpacity(newOpacity);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -100,54 +40,65 @@ export default function Home() {
       animate={{ opacity: 1 }}
       transition={{ delay: 1, duration: 1 }}
       ref={containerRef}
-      className="gap-3 p-3 md:container md:mx-auto md:p-10"
+      className=""
     >
-      <section className="fixed top-0 left-0 z-[-1] flex h-[100vh] w-screen flex-col items-center justify-center md:w-auto">
-        <motion.div
-          initial={{
-            opacity: 0,
-            filter: "blur(70px)",
-          }}
-          animate={{
-            opacity: 1,
-            filter: "blur(0px)",
-          }}
-          transition={{
-            duration: 1,
-            ease: "easeOut",
-            delay: 1.5,
-          }}
-          className="md:h-[100vh] md:w-[100vw]"
-        >
-          <Canvas
-            gl={{
-              powerPreference: "high-performance",
-              preserveDrawingBuffer: false,
-              failIfMajorPerformanceCaveat: false,
-              antialias: true,
-            }}
-            shadows={false}
-          >
-            <directionalLight intensity={3} position={[0, 3, 2]} />
-            <PerspectiveCamera makeDefault fov={30} position={[0, 0, 6]} />
-            <Environment preset="city" />
-            <TextComponent opacity={opacity} /> <Cube setMeshRef={setMesh} />
-            <Loader />
-          </Canvas>
-        </motion.div>
-      </section>
-      <div className="flex h-[80vh] items-center justify-center"></div>
+      <div className={"gap-3 p-3 md:container md:mx-auto md:p-10"}>
+        <section className="top-0 left-0 z-[-1] flex h-[75vh] w-full items-center justify-center">
+          <div className="flex h-full w-full flex-col items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0, filter: "blur(70px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              transition={{ duration: 1, ease: "easeOut", delay: 1.5 }}
+              className="flex h-full w-full flex-col items-center justify-center"
+            >
+              {/* <Canvas
+              gl={{
+                powerPreference: "high-performance",
+                antialias: true,
+                preserveDrawingBuffer: false,
+                failIfMajorPerformanceCaveat: false,
+              }}
+              shadows={false}
+            >
+              <directionalLight intensity={3} position={[0, 3, 2]} />
+              <PerspectiveCamera makeDefault fov={30} position={[0, 0, 6]} />
+              <Environment preset="city" />
+              <TextComponent opacity={opacity} />
+              <Cube />
+              <Loader />
+            </Canvas> */}
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, filter: "blur(70px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+            >
+              <div className="text-3xl">
+                🔐 Dive into the world of encipherment — and make it fun! 🎉
+              </div>
+            </motion.div>
+          </div>
+        </section>
+        <div className="md:p-10">
+          <section id="encryption-section" className="py-20">
+            <Introduction />
+          </section>
 
-      <section id="encryption-section" className="min-h-[120vh] py-20">
-        <Encryption />
-      </section>
+          <section id="decryption-section" className="min-h-screen py-20">
+            <Features />
+          </section>
+          <section id="decryption-section" className="min-h-screen py-20">
+            <SupportedTechniques />
+          </section>
+        </div>
+      </div>
 
-      <section id="decryption-section" className="min-h-screen py-20">
-        <Decryption />
-      </section>
-      <div className="relative flex h-[80vh] flex-col items-center justify-center gap-5">
-        <div className="font-title text-9xl">Get Started!</div>
-        <div className="text-xl">Create a key to get started!</div>
+      <div className="relative  flex h-[100%] py-80 flex-col items-center justify-center gap-5">
+        <GradientBackground />
+        <div className="font-title relative z-30 text-9xl">Get Started for free!</div>
+        <Link href={"/techniques"}>
+          <Button scale={"medium"} />
+        </Link>
       </div>
     </motion.main>
   );

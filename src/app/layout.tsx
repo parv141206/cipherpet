@@ -46,17 +46,12 @@ export const metadata: Metadata = {
   },
 };
 
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable} dark`}>
-      <body className="text-white dark:bg-[#111111]">
+    <html lang="en" className={`dark antialiased`}>
+      <body className="text-white overflow-x-hidden dark:bg-[#111111]">
         <Navbar />
         {children}
         <Footer />

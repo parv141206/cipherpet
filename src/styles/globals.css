@@ -1,4 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import "tailwindcss";
+
 @font-face {
   font-family: "Roboto";
   src: url("/fonts/Roboto-Regular.ttf");
@@ -13,10 +16,33 @@
 }
 @theme {
   --font-roboto: "Roboto";
+  --font-inter: "Inter";
   --font-roboto-light: "RobotoLight";
-  --font-title: "Title";
+  --color-accent: #c084fc;
+  --color-muted: #9ca3af;
+}
+.font-title {
+  @apply font-inter text-accent text-5xl font-extrabold;
+}
+.font-sub-title {
+  @apply font-inter text-4xl font-extrabold;
+}
+body {
+  @apply font-inter text-muted tracking-wide;
+}
+.bg-accent-noise {
+  background: url("/png/dots.png");
+  background-size: contain;
+  opacity: 0.2;
+  mask-image: url(/svg/paper.svg);
+  mask-repeat: no-repeat;
+  mask-position: center center;
+  mask-size: 70%;
 }
 
-body {
-  font-family: "Roboto";
-}
+/*#gradient {*/
+/*  background:*/
+/*          radial-gradient(circle at 20% 30%, red, transparent 70%) 0 0 / 30% 30% no-repeat,*/
+/*          radial-gradient(circle at 80% 70%, blue, transparent 70%) 0 0 / 50% 50% no-repeat;*/
+
+/*}*/

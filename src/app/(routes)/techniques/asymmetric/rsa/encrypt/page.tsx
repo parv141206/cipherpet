@@ -69,7 +69,7 @@ export default function Encrypt() {
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="q" className="text-sm font-semibold">
-              Enter Prime Number (Q)
+              Enter Private Key {`{e , n}`}
             </label>
             <input
               id="public-key"

@@ -17,6 +17,7 @@ export function TextComponent({ opacity }: TextComponentProps) {
       fillOpacity={opacity}
       strokeOpacity={opacity}
       outlineOpacity={opacity}
+      color={"#c084fc"}
     >
       CipherPet
     </Text>

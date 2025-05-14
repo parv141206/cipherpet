@@ -53,6 +53,7 @@ const Slide: React.FC<SlideProps> = ({
         delay,
         ease: "easeOut",
       }}
+      viewport={{ once: true }}
       className={className}
     >
       {children}
