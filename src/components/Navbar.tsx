@@ -11,29 +11,34 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-[200] flex w-full items-center justify-center p-4 md:p-5">
       <nav className="flex w-full max-w-screen-xl flex-col justify-center rounded-2xl bg-black p-4 shadow-2xl shadow-white/10 md:flex-row md:items-center md:justify-between">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-xl font-bold text-white"
-        >
-          <Image src="/favicon.ico" alt="logo" width={25} height={25} />
-          CipherPet
-        </Link>
+        <div className="flex justify-between md:block">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-xl font-bold text-white"
+          >
+            <Image src="/favicon.ico" alt="logo" width={25} height={25} />
+            CipherPet
+          </Link>
 
-        {/* Hamburger for mobile */}
-        <div className="md:hidden">
-          <button onClick={() => setIsOpen(!isOpen)} className="text-white">
-            <CiMenuFries size={24} />
-          </button>
+          {/* Hamburger for mobile */}
+          <div className="md:hidden">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-white">
+              <CiMenuFries size={24} />
+            </button>
+          </div>
         </div>
 
         {/* Main nav */}
         <ul
-          className={`flex-col items-center gap-6 text-gray-300 md:flex md:flex-row ${isOpen ? "flex" : "hidden"} md:flex`}
+          className={`flex-col md:my-0 my-5  items-center gap-6 text-gray-300 md:flex md:flex-row ${isOpen ? "flex" : "hidden"} md:flex`}
         >
           {/* Techniques Dropdown */}
           <li className="relative">
-            <Link href={"/techniques"} className="peer text-white hover:text-gray-200">
+            <Link
+              href={"/techniques"}
+              className="peer text-white hover:text-gray-200"
+            >
               Techniques
             </Link>
           </li>

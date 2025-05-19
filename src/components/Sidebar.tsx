@@ -69,8 +69,8 @@ export default function Sidebar() {
       </aside>
 
       {/* Mobile Navbar */}
-      <header className="sticky top-16 z-[200] flex w-full items-center justify-center p-4 md:hidden">
-        <div className="flex w-full flex-col rounded-2xl  p-4 shadow-none shadow-white/10">
+      <header className="sticky top-16 z-[199] flex w-full items-center justify-center p-4 md:hidden">
+        <div className="flex w-full flex-col  bg-black shadow-2xl shadow-white/10 rounded-2xl  p-4 ">
           <div className="flex items-center justify-between text-white">
             <Link href="/" className="flex items-center gap-3 text-xl font-bold">
               Techniques

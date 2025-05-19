@@ -51,22 +51,22 @@ export default function Home() {
               transition={{ duration: 1, ease: "easeOut", delay: 1.5 }}
               className="flex h-full w-full flex-col items-center justify-center"
             >
-              {/* <Canvas
-              gl={{
-                powerPreference: "high-performance",
-                antialias: true,
-                preserveDrawingBuffer: false,
-                failIfMajorPerformanceCaveat: false,
-              }}
-              shadows={false}
-            >
-              <directionalLight intensity={3} position={[0, 3, 2]} />
-              <PerspectiveCamera makeDefault fov={30} position={[0, 0, 6]} />
-              <Environment preset="city" />
-              <TextComponent opacity={opacity} />
-              <Cube />
-              <Loader />
-            </Canvas> */}
+              <Canvas
+                gl={{
+                  powerPreference: "high-performance",
+                  antialias: true,
+                  preserveDrawingBuffer: false,
+                  failIfMajorPerformanceCaveat: false,
+                }}
+                shadows={false}
+              >
+                <directionalLight intensity={3} position={[0, 3, 2]} />
+                <PerspectiveCamera makeDefault fov={30} position={[0, 0, 6]} />
+                <Environment preset="city" />
+                <TextComponent opacity={opacity} />
+                <Cube />
+                {/*<Loader />*/}
+              </Canvas>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, filter: "blur(70px)" }}
@@ -93,11 +93,13 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="relative  flex h-[100%] py-80 flex-col items-center justify-center gap-5">
+      <div className="relative flex h-[100%] flex-col items-center justify-center gap-5 py-80">
         <GradientBackground />
-        <div className="font-title relative z-30 text-9xl">Get Started for free!</div>
+        <div className="font-title relative z-30 text-9xl">
+          Get Started for free!
+        </div>
         <Link href={"/techniques"}>
-          <Button scale={"medium"} />
+          <Button scale={"medium"}>Get Started</Button>
         </Link>
       </div>
     </motion.main>

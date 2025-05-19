@@ -18,14 +18,22 @@
   --font-roboto: "Roboto";
   --font-inter: "Inter";
   --font-roboto-light: "RobotoLight";
+  --color-accent-light: #c799f6;
   --color-accent: #c084fc;
+  --color-accent-dark: #4b2273;
   --color-muted: #9ca3af;
+}
+.black-and-shadow {
+  @apply drop-shadow-2xl drop-shadow-white/10 bg-black;
 }
 .font-title {
   @apply font-inter text-accent text-5xl font-extrabold;
 }
 .font-sub-title {
   @apply font-inter text-4xl font-extrabold;
+}
+.font-sub-sub-title {
+  @apply font-inter text-2xl font-extrabold;
 }
 body {
   @apply font-inter text-muted tracking-wide;
@@ -46,3 +54,23 @@ body {
 /*          radial-gradient(circle at 80% 70%, blue, transparent 70%) 0 0 / 50% 50% no-repeat;*/
 
 /*}*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #111111;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c084fc;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

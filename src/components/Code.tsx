@@ -1,33 +1,76 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
-export default function Code({
-  title,
-  smaller = false,
-  children,
-}: {
+type CodeProps = {
   title?: string;
   smaller?: boolean;
-  children: React.ReactNode;
-}) {
+  codeSnippets?: {
+    ts?: string;
+    cpp?: string;
+  };
+  children?: React.ReactNode;
+};
+
+const LANGUAGES = {
+  ts: "TypeScript",
+  cpp: "C++",
+};
+
+export default function Code({ title, smaller = false, codeSnippets, children }: CodeProps) {
+  const [language, setLanguage] = useState<"ts" | "cpp">("ts");
+
+  const hasMultiple = codeSnippets?.ts && codeSnippets.cpp;
+
   return (
     <div
-      className={`flex w-full max-w-full flex-col rounded-md bg-black text-[0.7rem] drop-shadow-2xl drop-shadow-white/10 dark:text-gray-400 ${
-        smaller ? "md:text-[0.9rem]" : "md:text-lg"
+      className={`flex w-full overflow-x-scroll max-w-full flex-col rounded-md black-and-shadow dark:text-gray-300 ${
+        smaller ? "text-sm md:text-[0.9rem]" : "text-[0.7rem] md:text-lg"
       }`}
     >
-      <div className="relative flex items-center">
-        <div className="absolute m-3 flex gap-1">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <div key={index} className="h-3 w-3 rounded-full bg-gray-800"></div>
-          ))}
+      <div className="relative flex items-center justify-between px-4 py-2">
+        <div className="flex gap-1">
+          {/*{Array.from({ length: 3 }).map((_, index) => (*/}
+            <div  className="h-3 w-3 rounded-full bg-red-500"></div>
+            <div  className="h-3 w-3 rounded-full bg-yellow-500"></div>
+            <div  className="h-3 w-3 rounded-full bg-green-500"></div>
+          {/*))}*/}
         </div>
-        <div className="flex w-full items-center justify-center py-1 pt-1.5 text-sm">
-          {title}
-        </div>
+        {title && <div className="text-sm font-semibold text-center">{title}</div>}
+        {hasMultiple && (
+          <select
+            className="rounded bg-gray-900 px-2 py-1 text-xs text-white"
+            value={language}
+            onChange={(e) => setLanguage(e.target.value as "ts" | "cpp")}
+          >
+            {Object.entries(LANGUAGES).map(([lang, label]) => (
+              <option key={lang} value={lang}>
+                {label}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
 
-      <hr className="text-gray-800" />
-      <div className="p-5 break-words">{children}</div>
+      <hr className="border-gray-700" />
+
+      <div className="p-4 overflow-x-auto">
+        {codeSnippets ? (
+          <SyntaxHighlighter
+            language={language}
+            style={dracula}
+            wrapLongLines
+            showLineNumbers
+            customStyle={{ backgroundColor: "transparent", padding: 0 }}
+          >
+            {codeSnippets[language] ?? ""}
+          </SyntaxHighlighter>
+
+        ) : (
+          children
+        )}
+      </div>
     </div>
   );
 }

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Sidebar from "~/components/Sidebar";
+import { PreviousAndNextWrapper } from "~/components/Techniques/PreviousAndNext";
+import { Loader } from "~/components/Loader";
 
 export default function TechniquesLayout({
   children,
@@ -9,7 +11,11 @@ export default function TechniquesLayout({
   return (
     <main className={"container mx-auto flex md:flex-row flex-col min-h-[100vh] "}>
       <Sidebar />
-      <section className="p-10">{children}</section>
+      <section className="md:p-10 p-3">{children}
+        <Suspense fallback={<Loader/>}>
+          <PreviousAndNextWrapper />
+        </Suspense>
+      </section>
     </main>
   );
 }
