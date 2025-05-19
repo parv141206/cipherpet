@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 type CodeProps = {
   title?: string;
@@ -59,7 +59,7 @@ export default function Code({ title, smaller = false, codeSnippets, children }:
         {codeSnippets ? (
           <SyntaxHighlighter
             language={language}
-            style={dracula}
+            style={materialDark}
             wrapLongLines
             showLineNumbers
             customStyle={{ backgroundColor: "transparent", padding: 0 }}

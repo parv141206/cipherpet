@@ -6,22 +6,35 @@ export default function CaesarCipherCodeView() {
       title="Caesar Cipher"
       codeSnippets={{
         ts: `// Caesar Cipher in TypeScript
-// This function encrypts text using a Caesar Cipher with a given key
+// Encrypts the text by shifting letters forward by 'key'
 function caesarEncrypt(text: string, key: number): string {
-  // Convert text to uppercase to simplify letter mapping
   const input = text.toUpperCase();
   let result = "";
 
   for (let char of input) {
     const code = char.charCodeAt(0);
-    
-    // Check if character is an uppercase English letter
     if (code >= 65 && code <= 90) {
-      // Shift the character by key positions in the alphabet
       const shifted = ((code - 65 + key) % 26) + 65;
       result += String.fromCharCode(shifted);
     } else {
-      // If not a letter (e.g. space, punctuation), keep it unchanged
+      result += char;
+    }
+  }
+
+  return result;
+}
+
+// Decrypts the text by shifting letters backward by 'key'
+function caesarDecrypt(text: string, key: number): string {
+  const input = text.toUpperCase();
+  let result = "";
+
+  for (let char of input) {
+    const code = char.charCodeAt(0);
+    if (code >= 65 && code <= 90) {
+      const shifted = ((code - 65 - key + 26) % 26) + 65;
+      result += String.fromCharCode(shifted);
+    } else {
       result += char;
     }
   }
@@ -30,10 +43,11 @@ function caesarEncrypt(text: string, key: number): string {
 }
 
 // Example usage:
-console.log(caesarEncrypt("HELLO", 3)); // Output: KHOOR`,
+console.log(caesarEncrypt("HELLO", 3)); // Output: KHOOR
+console.log(caesarDecrypt("KHOOR", 3)); // Output: HELLO`,
 
         cpp: `// Caesar Cipher in C++
-// This function takes a string and a key, and returns the encrypted version using Caesar Cipher
+// Encrypts the text by shifting letters forward by 'key'
 #include <iostream>
 #include <string>
 using namespace std;
@@ -42,16 +56,28 @@ string caesarEncrypt(const string& text, int key) {
   string result = "";
 
   for (char c : text) {
-    // Convert each character to uppercase for consistent mapping
     char upper = toupper(c);
-
-    // Check if it's an uppercase alphabet letter
     if (upper >= 'A' && upper <= 'Z') {
-      // Shift it by the key (modulo 26 to wrap around A-Z)
       char shifted = ((upper - 'A' + key) % 26) + 'A';
       result += shifted;
     } else {
-      // Leave non-letter characters unchanged
+      result += c;
+    }
+  }
+
+  return result;
+}
+
+// Decrypts the text by shifting letters backward by 'key'
+string caesarDecrypt(const string& text, int key) {
+  string result = "";
+
+  for (char c : text) {
+    char upper = toupper(c);
+    if (upper >= 'A' && upper <= 'Z') {
+      char shifted = ((upper - 'A' - key + 26) % 26) + 'A';
+      result += shifted;
+    } else {
       result += c;
     }
   }
@@ -60,10 +86,14 @@ string caesarEncrypt(const string& text, int key) {
 }
 
 int main() {
-  // Example usage:
-  cout << caesarEncrypt("HELLO", 3) << endl; // Output: KHOOR
+  string encrypted = caesarEncrypt("HELLO", 3);
+  string decrypted = caesarDecrypt(encrypted, 3);
+
+  cout << encrypted << endl; // Output: KHOOR
+  cout << decrypted << endl; // Output: HELLO
+
   return 0;
-}`,
+}`
       }}
     />
   );

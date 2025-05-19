@@ -23,7 +23,26 @@ export function DiagramBox({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-
+export function Matrix ({matrix}: { matrix: Array<Array<number>> }) {
+  return (
+    <div className={"flex flex-col gap-2"}>
+      {matrix.map((row, rowIndex) => (
+        <div key={rowIndex} className={"flex gap-2"}>
+          {row.map((value, colIndex) => (
+            <div
+              key={colIndex}
+              className={
+                "border-accent/20 flex w-fit items-center justify-center rounded-xl border-2 border-dashed p-3"
+              }
+            >
+              {value}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
 export function DiagramArrow({
   direction,
   size,
